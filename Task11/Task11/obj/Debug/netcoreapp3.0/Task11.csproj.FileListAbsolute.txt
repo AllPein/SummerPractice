@@ -1,0 +1,11 @@
+C:\Users\panus\source\repos\Практика\Task11\Task11\bin\Debug\netcoreapp3.0\Task11.exe
+C:\Users\panus\source\repos\Практика\Task11\Task11\bin\Debug\netcoreapp3.0\Task11.deps.json
+C:\Users\panus\source\repos\Практика\Task11\Task11\bin\Debug\netcoreapp3.0\Task11.runtimeconfig.json
+C:\Users\panus\source\repos\Практика\Task11\Task11\bin\Debug\netcoreapp3.0\Task11.runtimeconfig.dev.json
+C:\Users\panus\source\repos\Практика\Task11\Task11\bin\Debug\netcoreapp3.0\Task11.dll
+C:\Users\panus\source\repos\Практика\Task11\Task11\bin\Debug\netcoreapp3.0\Task11.pdb
+C:\Users\panus\source\repos\Практика\Task11\Task11\obj\Debug\netcoreapp3.0\Task11.csprojAssemblyReference.cache
+C:\Users\panus\source\repos\Практика\Task11\Task11\obj\Debug\netcoreapp3.0\Task11.AssemblyInfoInputs.cache
+C:\Users\panus\source\repos\Практика\Task11\Task11\obj\Debug\netcoreapp3.0\Task11.AssemblyInfo.cs
+C:\Users\panus\source\repos\Практика\Task11\Task11\obj\Debug\netcoreapp3.0\Task11.dll
+C:\Users\panus\source\repos\Практика\Task11\Task11\obj\Debug\netcoreapp3.0\Task11.pdb

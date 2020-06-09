@@ -1,0 +1,11 @@
+C:\Users\panus\source\repos\Практика\Task9\bin\Debug\netcoreapp3.0\Task9.exe
+C:\Users\panus\source\repos\Практика\Task9\bin\Debug\netcoreapp3.0\Task9.deps.json
+C:\Users\panus\source\repos\Практика\Task9\bin\Debug\netcoreapp3.0\Task9.runtimeconfig.json
+C:\Users\panus\source\repos\Практика\Task9\bin\Debug\netcoreapp3.0\Task9.runtimeconfig.dev.json
+C:\Users\panus\source\repos\Практика\Task9\bin\Debug\netcoreapp3.0\Task9.dll
+C:\Users\panus\source\repos\Практика\Task9\bin\Debug\netcoreapp3.0\Task9.pdb
+C:\Users\panus\source\repos\Практика\Task9\obj\Debug\netcoreapp3.0\Task9.csprojAssemblyReference.cache
+C:\Users\panus\source\repos\Практика\Task9\obj\Debug\netcoreapp3.0\Task9.AssemblyInfoInputs.cache
+C:\Users\panus\source\repos\Практика\Task9\obj\Debug\netcoreapp3.0\Task9.AssemblyInfo.cs
+C:\Users\panus\source\repos\Практика\Task9\obj\Debug\netcoreapp3.0\Task9.dll
+C:\Users\panus\source\repos\Практика\Task9\obj\Debug\netcoreapp3.0\Task9.pdb
