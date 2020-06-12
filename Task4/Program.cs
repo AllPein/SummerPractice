@@ -11,17 +11,23 @@ namespace Task4
             double x1 = Input("Введите x1: ");
             double x2 = Input("Введите x2: ");
 
-            double xOld = x1;
-            while (Math.Abs(xOld - x2) >= e) 
-            {
-                xOld = x2;
-                x2 = x2 - f(x2) / (f(x2) - f(x1)) * (x2 - x1);
-                x1 = xOld;
-            }
-
-            Console.WriteLine(x2);
+            double x = Solve(x1, x2, e);
+            Console.WriteLine(x);
         }
-
+        public static double Solve(double xPrev, double xCur, double e)
+        {
+            double xNext = 0;
+            double tmp;
+            do
+            {
+                tmp = xNext;
+                xNext = xCur - f(xCur) * (xPrev - xCur) / (f(xPrev) - f(xCur));
+                xPrev = xCur;
+                xCur = tmp;
+            } while (Math.Abs(xNext - xCur) > e);
+ 
+            return xNext;
+        }
         static double f(double x)
         {
             return Math.Pow(x, 2) - 1.3 * Math.Log(x + 0.5) - 2.8 * x + 1.15;

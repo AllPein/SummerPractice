@@ -7,32 +7,37 @@ namespace Task2
         static void Main(string[] args)
         {
             string[] values = File.ReadAllText("INPUT.txt").Split(new char[] { ' ' }, StringSplitOptions.RemoveEmptyEntries);
-            int w;
-            int h;
+            
+            Int64 w;
+            Int64 h;
 
-            bool okW = int.TryParse(values[0], out w);
-            bool okH = int.TryParse(values[1], out h);
+            bool okW = Int64.TryParse(values[0], out w);
+            bool okH = Int64.TryParse(values[1], out h);
 
             if (!okW || !okH)
-                Environment.Exit(0);
+                Environment.Exit(0); 
 
-
-            int answer = Solve(w, h);
-
+    
+            Int64 answer = Solve(w, h);
+            
+            //Console.WriteLine(answer.ToString());
             File.WriteAllText("OUTPUT.txt", answer.ToString());
         }
-        public static int Solve(int w, int h)
+
+        static Int64 FindSum(Int64 n)        
         {
-            int sum1 = 0;
-            int sum2 = 0;
-            for (int i = 1; i <= w; i++)
+            Int64 sum = 0;
+            for (int i = 1; i <= n; i++)
             {
-                sum1 += i;
+                sum += i;
             }
-            for (int i = 1; i <= h; i++)
-            {
-                sum2 += i;
-            }
+            return sum;
+        }
+        
+        static Int64 Solve(Int64 w, Int64 h)
+        {
+            Int64 sum1 = FindSum(w);
+            Int64 sum2 = FindSum(h);
             return sum1 * sum2;
         }
     }

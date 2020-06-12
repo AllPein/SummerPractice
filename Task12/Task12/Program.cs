@@ -39,7 +39,7 @@ namespace Task12
 
         public TreeNode Right { get; set; }
 
-        public Arr Insert(TreeNode node, int chCount, int compCount)
+        public Arr Insert(TreeNode node)
         {
             
             if (node.Data < Data)
@@ -50,7 +50,7 @@ namespace Task12
                 }
                 else
                 {
-                    Left.Insert(node, chCount + 1, compCount + 1);
+                    Left.Insert(node);
                 }
             }
             else
@@ -61,13 +61,13 @@ namespace Task12
                 }
                 else
                 {
-                    Right.Insert(node, chCount + 1, compCount + 1);
+                    Right.Insert(node);
                 }
             }
-            return new Arr(new int[]{}, chCount, compCount);
+            return new Arr(new int[]{}, 0, 0);
         }
 
-        public Arr Transform(Arr a, List<int> elements = null)
+        public Arr Transform(int compareCount, List<int> elements = null)
         {
             if (elements == null)
             {
@@ -76,17 +76,17 @@ namespace Task12
 
             if (Left != null)
             {
-                Left.Transform(a, elements);   
+                Left.Transform(compareCount, elements);   
             }
 
             elements.Add(Data);
 
             if (Right != null)
             {              
-                Right.Transform(a, elements);
+                Right.Transform(compareCount, elements);
             }
 
-            return new Arr(elements.ToArray(), a.chCount, a.compCount);
+            return new Arr(elements.ToArray(), compareCount, compareCount);
         }
     }
     class Program
@@ -115,13 +115,12 @@ namespace Task12
         private static Arr TreeSort(int[] array)
         {
             var treeNode = new TreeNode(array[0]);
-            Arr a = new Arr(new int[]{}, 0, 0);
             for (int i = 1; i < array.Length; i++)
             {
-                a = treeNode.Insert(new TreeNode(array[i]), 0, 0);
+                treeNode.Insert(new TreeNode(array[i]));
             }
-
-            return treeNode.Transform(a);
+                
+            return treeNode.Transform(0);
         }
 
         private static Arr BubbleSort(int[] arr)

@@ -9,8 +9,19 @@ namespace Task5
             int n = Input("Введите n: ");
             int[,] matr = FillMatr(n);
 
+            int[] answer = Solve(matr);    
+
+            foreach (var value in answer)
+            {
+                Console.Write($"{value} ");
+            }
+
+        }
+
+        static int[] Solve(int[,] matr)
+        {
+            int n = matr.GetLength(0);
             int[] answer = new int[n];
-            
 
             for (int i = 0; i < n; i++)
             {
@@ -20,14 +31,9 @@ namespace Task5
                     minI = Math.Min(minI, matr[i, j]);
                 }
                 answer[i] = minI;
-
             }
 
-            foreach (var value in answer)
-            {
-                Console.Write($"{value} ");
-            }
-
+            return answer;
         }
         static int Input(string msg)
         {
