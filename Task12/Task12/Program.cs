@@ -39,7 +39,7 @@ namespace Task12
 
         public TreeNode Right { get; set; }
 
-        public Arr Insert(TreeNode node)
+        public void Insert(TreeNode node)
         {
             
             if (node.Data < Data)
@@ -64,7 +64,6 @@ namespace Task12
                     Right.Insert(node);
                 }
             }
-            return new Arr(new int[]{}, 0, 0);
         }
 
         public Arr Transform(int compareCount, List<int> elements = null)
@@ -86,41 +85,44 @@ namespace Task12
                 Right.Transform(compareCount, elements);
             }
 
-            return new Arr(elements.ToArray(), compareCount, compareCount);
+            return new Arr(elements.ToArray(), 0, compareCount);
         }
     }
     class Program
     {
         static void Main(string[] args)
         {
-            Console.Write("n = ");
-            var n = int.Parse(Console.ReadLine());
-
-            var a = new int[n];
-            var random = new Random();
-            for (int i = 0; i < a.Length; i++)
-            {
-                a[i] = random.Next(0, 100);
-            }
-
-            Console.WriteLine("Random Array: {0}", string.Join(" ", a));
-
-            Console.WriteLine(TreeSort(a).ToString());
-
-            Arr sorted = BubbleSort(a);
+            int n = 5;
+            int[] arr1 = { 1, 2, 3, 4, 5 };
+            int[] arr2 = { 5, 4, 3, 2, 1 };
+            int[] arr3 = { 4, 2, 1, 3, 5 };
             
-            Console.WriteLine(sorted.ToString());
+            Console.WriteLine($"1. Отсортированный по возрастанию массив: {string.Join(" ", arr1)}");
+            Console.WriteLine($"2. Отсортированный по убыванию массив: {string.Join(" ", arr2)}");
+            Console.WriteLine($"3. Неотсортированный массив: {string.Join(" ", arr3)} \n");
+            
+            Console.WriteLine("Сортировка бинарным деревом: ");
+            Console.WriteLine($"1.{TreeSort(arr1).ToString()}");
+            Console.WriteLine($"2.{TreeSort(arr2).ToString()}");
+            Console.WriteLine($"3.{TreeSort(arr3).ToString()} \n");
+
+            Console.WriteLine("Сортировка пузырьком: ");
+            Console.WriteLine($"1.{BubbleSort(arr1).ToString()}");
+            Console.WriteLine($"2.{BubbleSort(arr2).ToString()}");
+            Console.WriteLine($"3.{BubbleSort(arr3).ToString()} \n");
 
         }
         private static Arr TreeSort(int[] array)
         {
             var treeNode = new TreeNode(array[0]);
+            int compareCount = 0;
             for (int i = 1; i < array.Length; i++)
             {
                 treeNode.Insert(new TreeNode(array[i]));
+                compareCount += 2;
             }
                 
-            return treeNode.Transform(0);
+            return treeNode.Transform(compareCount);
         }
 
         private static Arr BubbleSort(int[] arr)

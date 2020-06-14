@@ -33,6 +33,10 @@ namespace Task10
             return this.GetHeight(ref p.right) - this.GetHeight(ref p.left);
         }
 
+        private void AddHeight()
+        {
+            this.node.height++;
+        }
         private void FixHeight(ref Node p)
         {
             int hl = this.GetHeight(ref p.left);
@@ -58,7 +62,6 @@ namespace Task10
             this.FixHeight(ref p);
             return p;
         }
-
         private Node Balance(ref Node p)
         {
             this.FixHeight(ref p);
@@ -80,9 +83,23 @@ namespace Task10
             if (p == null) return new Node(k);
 
             if (k < p.key)
+            {
                 p.left = Insert(ref p.left, k);
-            else
+                this.AddHeight();
+            }
+            else if (k > p.key && this.node.height == 2)
+            {
+                p.left = p.right;
+                p.right = null;
                 p.right = Insert(ref p.right, k);
+                this.AddHeight();
+            }
+            else
+            {
+                p.right = Insert(ref p.right, k);
+                this.AddHeight();
+            }
+            
             return Balance(ref p);
         }
         public static void Run(Node p, int l)
