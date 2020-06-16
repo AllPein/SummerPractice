@@ -29,20 +29,35 @@ namespace Task6
             double ak = 0;
             double[] gt = new double[M];
             double[] nums = new double[N];
-
+            nums[0] = a1;
+            nums[1] = a2;
+            nums[2] = a3;
+    
             int gtIndex = 0;
-            for (int i = 1; i <= N; i++)
+            for (int i = 0; i < 3; i++)
+            {
+                if (nums[i] > L)
+                {
+                    gt[gtIndex] = nums[i];
+                    gtIndex++;
+                }
+            }
+            
+            for (int i = 3; i < N; i++)
             {
                 if (gtIndex == gt.Length)
                     break;
-                
-                ak = a(a1, a2, a3, i);
+
+                ak = (7/3*a3 + a2)/2 * a1;
+                a3 = ak;
+                a2 = a3;
+                a1 = a2;
                 if (ak > L)
                 {
                     gt[gtIndex] = ak;
                     gtIndex++;
                 }
-                nums[i - 1] = ak;
+                nums[i] = ak;
             }
 
             if (gtIndex == gt.Length)
