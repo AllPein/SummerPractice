@@ -20,10 +20,9 @@ namespace Task2
     
             Int64 answer = Solve(w, h);
             
-            //Console.WriteLine(answer.ToString());
             File.WriteAllText("OUTPUT.txt", answer.ToString());
         }
-
+        //Функция для находении суммы чисел от 1 до N
         static Int64 FindSum(Int64 n)        
         {
             Int64 sum = 0;
@@ -33,7 +32,7 @@ namespace Task2
             }
             return sum;
         }
-        
+        //Функция для расчета количества прямоугольников
         static Int64 Solve(Int64 w, Int64 h)
         {
             Int64 sum1 = FindSum(w);

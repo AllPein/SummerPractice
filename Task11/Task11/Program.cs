@@ -1,5 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
+
 namespace Task11
 {
     class Program
@@ -15,10 +17,12 @@ namespace Task11
 
             string encrypted = Encrypt(array);
             string decrypted = Decrypt(encrypted);
+            Console.WriteLine("Зашифрованная строка: ");
             Console.WriteLine(encrypted);
+            Console.WriteLine("Расшифрованная строка: ");
             Console.WriteLine(decrypted);
         }
-
+        //Создание строки из матрицы
         public static string MakeString(char[,] matr)
         {
             string txt = "";
@@ -30,7 +34,7 @@ namespace Task11
 
             return txt;
         }
-
+        //Создание матрицы из строки
         public static char[,] MakeMatr(char[] array)
         {
             char[,] matr = new char[11, 11];
@@ -43,62 +47,59 @@ namespace Task11
 
             return matr;
         }
+        //Кодирование строки
         static string Encrypt(char[] arr)
         {
             char[,] matr = MakeMatr(arr);
             string encryptedString = "";
-            int min = 0;
-            int max = 10;
-            do
-            {
-                for (int i = min; i <= max; i++)
-                    encryptedString = matr[min, i].ToString() + encryptedString;
-                
-                for (int i = min + 1; i <= max; i++)
-                    encryptedString = matr[i, max].ToString() + encryptedString;
-                
-                for (int i= max - 1; i >= min; i--)
-                    encryptedString = matr[max, i].ToString() + encryptedString;
-                
-                for (int i = max - 1; i >= min + 1; i--)
-                    encryptedString = matr[i, min].ToString() + encryptedString;
-                min++;
-                max--;
-            } while (encryptedString.Length != 121);
+            int iInd = matr.GetLength(0)/2;
+            int jInd = matr.GetLength(0)/2;    
+
+            int iStep = 1;
+            int jStep = 1;
+
+            for(int i = 0; i < 11; i++){
+                for (int h = 0; h < i; h++) encryptedString += matr[iInd, jInd += jStep];
+                for (int v = 0; v < i; v++) encryptedString += matr[iInd += iStep, jInd];
+                jStep = -jStep;
+                iStep = -iStep;     
+            }   
+            for (int h = 0; h < matr.GetLength(0) - 1; h++) 
+                encryptedString += matr[iInd, jInd += jStep];
             
             return encryptedString;
         }
+        //Расшифровка строки
         static string Decrypt(string encrypted)
         {
             char[,] matr = new char[11, 11];
-            int min = 0;
-            int max = 10;
-            int s = 120;
-            do
+            int iInd = matr.GetLength(0)/2;
+            int jInd = matr.GetLength(0)/2;
+            int index = 0;
+            int iStep = 1;
+            int jStep = 1;
+
+            for(int i = 0; i < 11; i++){
+                for (int h = 0; h < i; h++)
+                {
+                    matr[iInd, jInd += jStep] = encrypted[index];
+                    index++;
+                }
+
+                for (int v = 0; v < i; v++)
+                {
+                    matr[iInd += iStep, jInd] = encrypted[index];
+                    index++;
+                }
+                jStep = -jStep;
+                iStep = -iStep;
+            }
+        
+            for (int h = 0; h < matr.GetLength(0) - 1; h++)
             {
-                for (int i = min; i <= max; i++)
-                {
-                    matr[min, i] = encrypted[s];
-                    s--;
-                }
-                for (int i = min + 1; i <= max; i++)
-                {
-                    matr[i, max] = encrypted[s];
-                    s--;
-                }
-                for (int i = max - 1; i >= min; i--)
-                {
-                    matr[max, i] = encrypted[s];
-                    s--;
-                }
-                for (int i = max - 1; i >= min + 1; i--)
-                {
-                    matr[i, min] = encrypted[s];
-                    s--;
-                }
-                min++;
-                max--;
-            } while (s != -1);
+                matr[iInd, jInd += jStep] = encrypted[index];
+                index++;
+            } 
             
             string text = MakeString(matr);
             return text;

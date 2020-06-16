@@ -8,7 +8,7 @@ namespace Task9
     {
         private DNode _head;
         public uint Count;
-
+        
         public MyLinkedList(int n)
         {
             this._head = null;
@@ -16,6 +16,7 @@ namespace Task9
 
             this.MakeList(n);
         }
+        //Функция для ввода числа
         public int Input(string msg)
         {
             int x;
@@ -28,27 +29,36 @@ namespace Task9
                 return Input(msg);
             }
         }
+        //Функция, создающая список
         public void MakeList(int n)
         {
-            int[] arr = new int[n];
+
             for (int i = 0; i < n; ++i)
             {
                 int num = this.Input($"Введиите {i + 1} элемент списка: ");
-                if (num > 0)
-                    this.AddToStart(num);
-                else if (num == 0)
-                    this.Add(num);
+                if (i == 0)
+                {
+                    this._head = new DNode(num);
+                }
                 else
-                    arr[i] = num;
+                {
+                    this.Add(num);
+                }
             }
-            for (int i = 0; i < arr.Length; ++i)
-            {
-                if (arr[i] == 0)
-                    break;
-                this.Add(arr[i]);
-                
-            }
+
         }
+        //Функция для получения последней положительной ноды 
+        private DNode GetLastPositive()
+        {
+            var temp = this._head;
+            while (temp.Next != null && temp.Next.Data > 0)
+            {
+                temp = temp.Next;
+            }
+
+            return temp.Data > 0 ? temp : null; // Проверка - если ли вообще положительные элементы?
+        }
+        //Функция добавления в начало списка
         public void AddToStart(int data)
         {
             DNode node = new DNode(data);
@@ -60,25 +70,42 @@ namespace Task9
 
             this.Count++;
         }
+        //Функция добавление в конец списка
+        private void AddToEnd(int data)
+        {
+            var node = new DNode(data);
+            node.Data = data;
 
+            var last = this.GetLastNode();
+            last.Next = node;
+
+        }
+        //Функция добавления в список в зависимости от знака числа
         public void Add(int data)
         {
-            DNode node = new DNode(data);
-            if (this._head == null)
+            if (data > 0)
             {
-                this.Count++;
-                node.Prev = null;
-                this._head = node;
-                return;
+                this.AddToStart(data);
             }
-
-            DNode lastNode = GetLastNode();
-            lastNode.Next = node;
-            node.Prev = lastNode;
-
-            this.Count++;
+            else if (data < 0)
+            {
+                this.AddToEnd(data);
+            }
+            else
+            {
+                var lastPositive = GetLastPositive();
+                if (lastPositive == null) this.AddToStart(0);
+                else
+                {
+                    var nextOfLastPositive= lastPositive.Next;
+                    var node = new DNode(data);
+                    node.Data = 0;
+                    lastPositive.Next = node;
+                    node.Next = nextOfLastPositive;
+                }
+            }
         }
-
+        //Функция удаления из по ключу
         public void RemoveByKey(T key)
         {
             DNode temp = this._head;
@@ -111,37 +138,7 @@ namespace Task9
                 temp.Prev.Next = temp.Next;
             }
         }
-
-        public void RemoveByIndex(int index)
-        {
-            if (index > this.Count - 1 || index < 0) throw new ArgumentException($"Некорректный индекс: {index}");
-
-            var currentIndex = 0;
-            var currentNode = _head;
-
-            while (currentIndex != index)
-            {
-                currentNode = currentNode.Next;
-                currentIndex++;
-            }
-
-            this.Count--;
-            if (currentIndex == 0) // Удаляем в начале
-            {
-                _head = currentNode.Next;
-                if (_head != null) _head.Prev = null;
-            }
-            else if (currentIndex > 0 && currentIndex < this.Count - 1) // Удаляем в середине
-            {
-                currentNode.Prev.Next = currentNode.Next;
-                currentNode.Next.Prev = currentNode.Prev;
-            }
-            else if (currentIndex == this.Count - 1) // Удаляем в конце
-            {
-                currentNode.Prev.Next = null;
-            }
-        }
-
+        //Функция поиска элемента в списке по ключу
         public bool FindElem(T key)
         {
             DNode temp = this._head;
@@ -153,7 +150,7 @@ namespace Task9
 
             return false;
         }
-
+        //Функция получения элемента по индексу
         public int GetByIndex(uint index)
         {
             if (index > this.Count) throw new ArgumentException("Индекс превышает размер коллекции");
@@ -169,8 +166,14 @@ namespace Task9
 
             return currentNode.Data;
         }
+        //Функция для получения последнего элемента списка
+        private DNode GetLastNode()
+        {
+            DNode temp = this._head;
+            while (temp.Next != null) temp = temp.Next;
 
-
+            return temp;
+        }
         public override string ToString()
         {
             var result = "";
@@ -183,15 +186,6 @@ namespace Task9
 
             return result;
         }
-
-        private DNode GetLastNode()
-        {
-            DNode temp = this._head;
-            while (temp.Next != null) temp = temp.Next;
-
-            return temp;
-        }
-
         IEnumerator IEnumerable.GetEnumerator()
         {
             return GetEnumerator();
@@ -232,7 +226,7 @@ namespace Task9
             {
             }
         }
-
+        //Класс, описывающий элемент списка
         private class DNode
         {
             public int Data;

@@ -17,7 +17,7 @@ namespace Task5
             }
 
         }
-
+        //Функция для нахождения минимальных чисел в матрице до главной диагонали
         static int[] Solve(int[,] matr)
         {
             int n = matr.GetLength(0);
@@ -35,6 +35,7 @@ namespace Task5
 
             return answer;
         }
+        //Функция проверки ввода
         static int Input(string msg)
         {
             Console.Write(msg);
@@ -47,6 +48,7 @@ namespace Task5
             }
             return x;
         }
+        //Функция заполнения матрицы
         static int[,] FillMatr(int n)
         {
             int[,] matr = new int[n, n];

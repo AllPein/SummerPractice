@@ -3,7 +3,7 @@ using System.Collections.Generic;
 
 namespace Task08
 {
-    // Ребро
+    // Класс, описывающий ребро
     public class Point
     {
         // Номера вершин, которые соединяют ребро
@@ -36,6 +36,7 @@ namespace Task08
             Console.WriteLine(result);
         }
 
+        //Метод поиска всех простых цепей в графе
         static string ChainsSearch(int verticiesCount, List<Point> edges, int k)
         {
             if (verticiesCount < 1)
@@ -77,7 +78,7 @@ namespace Task08
 
             return null;
         }
-        
+        //Метод поиска в глубину
         static string DFS(int u, int endVertex, List<Point> edges, int[] colors, string chain)
         {
             if (u != endVertex)

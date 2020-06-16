@@ -20,5 +20,6 @@ namespace Task9
 
             Console.WriteLine(list.FindElem(9));
         }
+        
     }
 }

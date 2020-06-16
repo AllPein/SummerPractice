@@ -4,6 +4,7 @@ namespace Task10
 {
     public class Tree
     {
+        //Класс описывающий узел дерева
         public class  Node
         {
             public int key;
@@ -18,25 +19,29 @@ namespace Task10
             }
             
         }
+        
         private Node node;
 
         public Tree(int key)
         {
             this.node = new Node(key);
         }
+        //Метод получения высоты узла
         private int GetHeight(ref Node p)
         {
             return p != null ? p.height : 0;
         }
+        //Метод получения разности высоты левого и правого поддерева
         private int bFactor(ref Node p)
         {
             return this.GetHeight(ref p.right) - this.GetHeight(ref p.left);
         }
-
+        //Метод увеличения высоты
         private void AddHeight()
         {
             this.node.height++;
         }
+        //Метод фиксирования высоты
         private void FixHeight(ref Node p)
         {
             int hl = this.GetHeight(ref p.left);
@@ -44,6 +49,7 @@ namespace Task10
 
             p.height = (hl > hr ? hl : hr) + 1;
         }
+        //Правый поворот дерева
         private Node RotateRight(ref Node p)
         {
             Node q = p.left;
@@ -53,6 +59,7 @@ namespace Task10
             this.FixHeight(ref q);
             return q;
         }
+        //Левый поворот дерева
         private Node RotateLeft(ref Node q)
         {
             Node p = q.right;
@@ -62,6 +69,7 @@ namespace Task10
             this.FixHeight(ref p);
             return p;
         }
+        //Метод балансировки
         private Node Balance(ref Node p)
         {
             this.FixHeight(ref p);
@@ -78,6 +86,7 @@ namespace Task10
             }
             return p;
         }
+        //Метод добавления узла в дерево
         public Node Insert(ref Node p, int k)
         {
             if (p == null) return new Node(k);
@@ -102,6 +111,7 @@ namespace Task10
             
             return Balance(ref p);
         }
+        //Метод прохода по дереву
         public static void Run(Node p, int l)
         {
             if (p != null)

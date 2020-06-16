@@ -13,11 +13,9 @@ namespace Task7
             foreach (var num in lengths)
                 sum += 1 / Math.Pow(2, num);
 
-            if (sum <= 1)
-                return true;
-            return false;
+            return sum <= 1;
         }
-
+        //Функция для проверки валидности введенных длин
         static int[] CheckInput(string[] inp)
         {
             int x;
@@ -26,8 +24,14 @@ namespace Task7
             foreach (var elem in inp)
             {
                 bool ok = int.TryParse(elem, out x);
-                if (ok) lengths[index] = x;
-                else return new int[] { };
+                if (ok)
+                {
+                    lengths[index] = x;
+                }
+                else
+                {
+                    return new int[] { };
+                }
                 index++;
             }
             return lengths;

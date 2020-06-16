@@ -14,6 +14,7 @@ namespace Task4
             double x = Solve(x1, x2, e);
             Console.WriteLine(x);
         }
+        //Функция для высчитывания значения функции методом хорд
         public static double Solve(double xPrev, double xCur, double e)
         {
             double xNext = 0;
@@ -28,10 +29,12 @@ namespace Task4
  
             return xNext;
         }
+        //Функция
         static double f(double x)
         {
             return Math.Pow(x, 2) - 1.3 * Math.Log(x + 0.5) - 2.8 * x + 1.15;
         }
+        //Функция для проверки ввода
         static double Input(string msg)
         {
             Console.Write(msg);

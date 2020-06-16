@@ -24,6 +24,7 @@ namespace Task7
         {
             this.root = new Node(-1);
         }
+        //Метод генерации символа в коде
         public static void GeneratePoint(Node p, int currentLength, int length)
         {
             if (currentLength != length - 1)
@@ -58,6 +59,7 @@ namespace Task7
                 }
             }
         }
+        //Метод генерации двоичного префиксного кода
         public static void GenerateCode(Node p, string word)
         {
             if (p != null && !p.IsEnd)

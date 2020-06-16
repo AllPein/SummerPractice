@@ -18,7 +18,7 @@ namespace Task3
             Console.WriteLine($"u = {u}");
 
         }
-        
+        //Функция для определения того, лежит ли точка внутри области
         public static int Solve(int x, int y)
         {
             if (y <= 1 - Math.Pow(x, 2) && Math.Pow(x, 2) + Math.Pow((y - 1), 2) <= 1)

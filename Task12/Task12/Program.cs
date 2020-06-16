@@ -2,12 +2,12 @@
 using System.Collections.Generic;
 namespace Task12
 {
-    public class Arr
+    public class ShowResults
     {
         public int chCount, compCount;
         public int[] arr;
         
-        public Arr(int[] arr, int chCount, int compCount)
+        public ShowResults(int[] arr, int chCount, int compCount)
         {
             this.arr = arr;
             this.chCount = chCount;
@@ -26,68 +26,7 @@ namespace Task12
             return output;
         }
     }
-    public class TreeNode
-    {
-        public TreeNode(int data)
-        {
-            Data = data;
-        }
-
-        public int Data { get; set; }
-
-        public TreeNode Left { get; set; }
-
-        public TreeNode Right { get; set; }
-
-        public void Insert(TreeNode node)
-        {
-            
-            if (node.Data < Data)
-            {
-                if (Left == null)
-                {
-                    Left = node;
-                }
-                else
-                {
-                    Left.Insert(node);
-                }
-            }
-            else
-            {
-                if (Right == null)
-                {
-                    Right = node;
-                }
-                else
-                {
-                    Right.Insert(node);
-                }
-            }
-        }
-
-        public Arr Transform(int compareCount, List<int> elements = null)
-        {
-            if (elements == null)
-            {
-                elements = new List<int>();
-            }
-
-            if (Left != null)
-            {
-                Left.Transform(compareCount, elements);   
-            }
-
-            elements.Add(Data);
-
-            if (Right != null)
-            {              
-                Right.Transform(compareCount, elements);
-            }
-
-            return new Arr(elements.ToArray(), 0, compareCount);
-        }
-    }
+    
     class Program
     {
         static void Main(string[] args)
@@ -112,20 +51,18 @@ namespace Task12
             Console.WriteLine($"3.{BubbleSort(arr3).ToString()} \n");
 
         }
-        private static Arr TreeSort(int[] array)
+        private static ShowResults TreeSort(int[] array)
         {
             var treeNode = new TreeNode(array[0]);
-            int compareCount = 0;
             for (int i = 1; i < array.Length; i++)
             {
                 treeNode.Insert(new TreeNode(array[i]));
-                compareCount += 2;
             }
                 
-            return treeNode.Transform(compareCount);
+            return treeNode.Transform(treeNode.compareCount);
         }
 
-        private static Arr BubbleSort(int[] arr)
+        private static ShowResults BubbleSort(int[] arr)
         {
             int tmp;
             int chCount = 0;
@@ -146,7 +83,7 @@ namespace Task12
                     }
                 }
             }
-            return new Arr(arr, chCount, compCount);
+            return new ShowResults(arr, chCount, compCount);
         }
     }
 }
