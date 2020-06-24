@@ -4,13 +4,13 @@ using System.Collections.Generic;
 namespace Task08
 {
     // Класс, описывающий ребро
-    public class Point
+    public class Edge
     {
         // Номера вершин, которые соединяет ребро
         public int V1;
         public int V2;
 
-        public Point(int v1, int v2)
+        public Edge(int v1, int v2)
         {
             V1 = v1;
             V2 = v2;
@@ -22,12 +22,12 @@ namespace Task08
 
         public static void Main()
         {
-            List<Point> edges = new List<Point>
+            List<Edge> edges = new List<Edge>
             {
-                new Point(1, 2),
-                new Point(2, 3),
-                new Point(1, 3),
-                new Point(3, 4)
+                new Edge(1, 2),
+                new Edge(2, 3),
+                new Edge(1, 3),
+                new Edge(3, 4)
             };
 
             int verticiesCount = Input("Введите количество вершин в графе: ");
@@ -51,7 +51,7 @@ namespace Task08
         }
 
         //Метод поиска всех простых цепей в графе
-        static void ChainsSearch(int verticiesCount, List<Point> edges, int k)
+        static void ChainsSearch(int verticiesCount, List<Edge> edges, int k)
         {
             if (verticiesCount < 1)
             {
@@ -73,6 +73,7 @@ namespace Task08
             }
             
             var colors = new int[verticiesCount + 1];
+            
             for (int i = 0; i < verticiesCount; i++)
             {
                 for (int j = i + 1; j < verticiesCount; j++)
@@ -82,18 +83,13 @@ namespace Task08
                         colors[z] = 1;
                     }
                     DFS(i, j, edges, colors, (i).ToString());
-
-                    if (chains.Count >= k)
-                    {
-                        return;
-                    }
                 }
             }
 
             
         }
         //Метод поиска в глубину
-        static void DFS(int u, int endVertex, List<Point> edges, int[] colors, string chain)
+        static void DFS(int u, int endVertex, List<Edge> edges, int[] colors, string chain)
         {
             if (u != endVertex)
                 colors[u] = 2;
@@ -107,7 +103,7 @@ namespace Task08
             {
                 if (colors[edge.V2] == 1 && edge.V1 == u)
                 {
-                     DFS(edge.V2, endVertex, edges, colors, chain + "-" + (edge.V2 + 1).ToString());
+                    DFS(edge.V2, endVertex, edges, colors, chain + "-" + (edge.V2 + 1).ToString());
                     colors[edge.V2] = 1;
                 }
                 else if (colors[edge.V1] == 1 && edge.V2 == u)

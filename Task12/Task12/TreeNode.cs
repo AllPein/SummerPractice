@@ -43,13 +43,22 @@ namespace Task12
             }
         }
 
+        public static void Count(ref int compareCount, TreeNode node)
+        {
+            if (node != null)
+            {
+                compareCount += node.compareCount;
+                Count(ref compareCount, node.Left);
+                Count(ref compareCount, node.Right);
+            }
+        }
+       
         public ShowResults Transform(int compareCount, List<int> elements = null)
         {
             if (elements == null)
             {
                 elements = new List<int>();
             }
-
             if (Left != null)
             {
                 Left.Transform(compareCount, elements);   

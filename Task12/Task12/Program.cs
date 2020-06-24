@@ -58,8 +58,11 @@ namespace Task12
             {
                 treeNode.Insert(new TreeNode(array[i]));
             }
-                
-            return treeNode.Transform(treeNode.compareCount);
+
+            int compareCount = 0;
+            TreeNode.Count(ref compareCount, treeNode);
+            
+            return treeNode.Transform(compareCount);
         }
 
         private static ShowResults BubbleSort(int[] arr)
